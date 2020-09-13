@@ -10,6 +10,7 @@ get "/signup" do
 end
     
 post "/signup" do
+    # binding.pry
 @user = User.new(params)
     if @user.save
       session[:user_id] = @user.id
