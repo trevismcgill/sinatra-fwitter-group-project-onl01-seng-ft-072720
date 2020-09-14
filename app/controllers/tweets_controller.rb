@@ -1,8 +1,11 @@
 class TweetsController < ApplicationController
 
     get "/tweets" do
+        # binding.pry
         if logged_in?
             erb :index
+            # @tweets = Tweet.all
+            # erb :"/tweet/tweets"
         else
             redirect "/login"
         end
@@ -19,10 +22,17 @@ class TweetsController < ApplicationController
     post "/tweets" do
         if logged_in?
         @tweet = Tweet.new(params[:tweet])
-        @tweet.user_id = current_user.id
+        current_user.tweets << @tweet
+        current_user.save
         redirect "/tweets"
         else
         redirect "/"
+        end
+    end
+
+    get "/tweets/:id" do
+        if logged_in?
+
         end
     end
 
